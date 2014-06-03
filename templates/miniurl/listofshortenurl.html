@@ -1,0 +1,22 @@
+<h1>Liste des URL raccourcis</h1>
+
+<p><a href="{% url 'create_new_url' %}">Raccourcir un nouvel URL.</a></p>
+
+<h2>Liste des URL raccourcis</h2>
+
+<ul>
+{% for miniurl in miniurls %}
+<li>
+	<p>
+		{{miniurl.url_long}} via
+		<a href="http://{{request.get_host}}{% url 'url_redirection' miniurl.code %}"> {{request.get_host}}{% url 'url_redirection' miniurl.code %}</a>
+		a été redirigé {{miniurl.nb_acces}} fois
+	</p>
+	<p>Créé par {{miniurl.pseudo}} en {{miniurl.date}}</p>
+</li>
+
+{% empty %}
+<p>Aucun url raccourci dans la BDD</p>
+
+{% endfor %}
+</ul>
